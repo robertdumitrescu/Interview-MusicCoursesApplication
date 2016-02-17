@@ -1,0 +1,32 @@
+{
+    "users" : [
+        {
+            "id" : "1",
+            "username" : "john",
+            "password" : "password",
+            "role" : "teacher",
+            "level" : 0
+        },
+        {
+            "id" : "2",
+            "username" : "michael",
+            "password" : "password",
+            "role" : "student",
+            "level" : 1
+        },
+        {
+            "id" : "3",
+            "username" : "robert",
+            "password" : "password",
+            "role" : "student",
+            "level" : 2
+        },
+        {
+            "id" : "4",
+            "username" : "Alvarez",
+            "password" : "password",
+            "role" : "student",
+            "level" : 3
+        }
+    ]
+}

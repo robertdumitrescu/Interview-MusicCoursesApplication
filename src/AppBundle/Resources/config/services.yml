@@ -1,0 +1,3 @@
+services:
+  course:
+    class: AppBundle\Services\CourseService

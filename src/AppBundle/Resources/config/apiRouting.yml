@@ -1,0 +1,19 @@
+api_all_courses:
+  pattern: /courses
+  defaults:
+    _controller: AppBundle:Api:coursesListing
+
+api_courses_by_level:
+  pattern: /courses/{level}
+  defaults:
+    _controller: AppBundle:Api:coursesListingByLevel
+
+api_course_by_id_and_level:
+  pattern: /course/{level}/{id}
+  defaults:
+    _controller: AppBundle:Api:courseByIdAndLevel
+
+api_course_create:
+  pattern: /course/create
+  defaults:
+    _controller: AppBundle:Api:createCourse

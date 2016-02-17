@@ -1,0 +1,181 @@
+.call-to-action-title{
+    text-align: center;
+}
+
+.custom-carousel-img{
+    width: 100%;
+    max-height: 360px;
+    display: block;
+    object-fit: cover;
+    object-position: 0 -100px;
+}
+.custom-navbar {
+    height: 100px;
+    background-color: #435562;
+    border-bottom: 2px solid #5D6B77;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.custom-nav-title {
+    color: #fff;
+    font-weight: bold;
+}
+.custom-nav-p {
+    color: #6F94AE;
+}
+.custom-right-menu {
+    margin-top: 30px;
+}
+.custom-main-title {
+    padding: 20px 0;
+    color: #3D4E5D;
+}
+.custom-blue-area {
+    margin: 0 0 70px 0;
+    text-align: center;
+}
+.custom-blue-text {
+    font-size: 17px;
+    color: #575555;
+}
+.custom-fa {
+    font-size: 50px;
+    color: #3C4E5C;
+}
+.custom-img {
+    display: block;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    text-align: center;
+    margin: 0 auto;
+}
+.custom-fluid-row {
+    background-color: #EDEDED;
+}
+.custom-blue-title {
+    color: #3D4E5D;
+    margin: 50px 0 50px 0;
+}
+.custom-paragraph {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 40px 0 60px 0;;
+}
+
+.custom-promo-bar {
+    background-color: #435562;
+    border-bottom: 2px solid #5D6B77;
+    border-top: 2px solid #5D6B77;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+.custom-lock {
+    color: #fff;
+    font-size: 68px;
+}
+.custom-piano-bottom {
+    margin-top: 20px;
+}
+
+.footer-wrapper{
+    padding-top: 20px;
+}
+
+.footer-placeholder{
+    color: #fff;
+    font-size: 14px;
+}
+
+.footer-name{
+    color: #fff;
+    font-size: 20px;
+    text-align: left;
+}
+
+.footer-link{
+    color: #fff;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.footer-link:hover{
+    color: #fff;
+}
+
+.footer-link:visited{
+    color: #fff;
+}
+
+.footer-separator{
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.central-data{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.custom-jumbotron{
+    position: absolute;
+    z-index: 1;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.custom-jumbotron-container{
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.custom-jumbotron-title{
+    text-align: center;
+    color: #FFF;
+}
+
+.custom-jumbotron-content{
+    color: #FFF;
+}
+
+.custom-jumbotron-button{
+
+}
+
+.custom-navbar-btn{
+    background-color: inherit;
+    color: #FFF;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.custom-navbar-btn:hover{
+    background-color: #35424D;
+    border-radius: 5px;
+    color: #FFF;
+    font-size: 20px;
+}
+
+.navbar-connect-btn{
+    margin-left: 20px;
+}
+
+.footer-main-btn{
+    margin-bottom: 20px;
+}
+
+/* Bootstrap overwriting */
+
+.navbar-toggle {
+    margin-top: 35px;
+}
+
+.carousel-indicators {
+    left: 25%;
+}

@@ -2,78 +2,84 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Services\CourseService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Exception\EmptyContentException;
+use AppBundle\Helper\Criteria;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
-class ApiController extends Controller
+class ApiController extends BaseController
 {
-
     /**
-     * @param Request $request
-     * @return JsonResponse
+     * @return  JsonResponse
      */
-    public function coursesListingAction(Request $request)
+    public function coursesListingAction()
     {
-        $path = __DIR__ . "/../Resources/data/courses.json";
-        $file = json_decode(file_get_contents($path));
-
-
-        return new JsonResponse($file);
+        $this->initialize();
+        return new JsonResponse($this->courseServices->findBy([]));
     }
 
     /**
-     * @param Request $request
-     * @param $level
-     * @return JsonResponse
+     * @param   int     $level
+     *
+     * @return  JsonResponse
      */
-    public function coursesListingByLevelAction(Request $request, $level)
+    public function coursesListingByLevelAction($level)
     {
-        $path = __DIR__ . "/../Resources/data/courses.json";
-        $file = json_decode(file_get_contents($path));
+        $this->initialize();
 
-        /** @var CourseService $courseService */
-        $courseService = $this->get("course");
-        $file = $courseService->filterByLevel($file->courses, $level);
+        try {
+            $response = $this->courseServices->findBy([
+                Criteria::LEVEL => $level,
+            ]);
+        } catch (EmptyContentException $ece) {
+            /**
+             * Here further development may occur
+             * We can implement a logger system to track unmatched searches
+             * Also, the error can be handled by a flashbag and the message can be
+             */
+            $response = $ece->getMessage();
+        }
 
-
-        return new JsonResponse($file);
+        return new JsonResponse($response);
     }
 
     /**
-     * @param Request $request
-     * @param $level
-     * @param $id
-     * @return JsonResponse
+     * @param   int     $id
+     * @param   int     $level
+     *
+     * @return  JsonResponse
      */
-    public function courseByIdAndLevelAction(Request $request, $level, $id)
+    public function courseByIdAndLevelAction($id, $level)
     {
-        $path = __DIR__ . "/../Resources/data/courses.json";
-        $file = json_decode(file_get_contents($path));
+        $this->initialize();
 
-        /** @var CourseService $courseService */
-        $courseService = $this->get("course");
-        $file = $courseService->getCourseByIdAndLevel($file->courses, $level, $id);
+        try {
+            $response = $this->courseServices->findBy([
+                Criteria::ID => $id,
+                Criteria::LEVEL => $level,
+            ]);
+        } catch (EmptyContentException $ece) {
+            /**
+             * Here further development may occur
+             * We can implement a logger system to track unmatched searches
+             * Also, the error can be handled by a flashbag and the message can be
+             */
+            $response = $ece->getMessage();
+        }
 
-
-        return new JsonResponse($file);
+        return new JsonResponse($response);
     }
 
     /**
-     * @param Request $request
-     * @return JsonResponse
+     * @param   Request     $request
+     *
+     * @return  JsonResponse
      */
     public function createCourseAction(Request $request)
     {
+        $this->initialize();
         $data = json_decode($request->getContent(), true);
 
-        $courseService = $this->get("course");
-        $returnedMsg = $courseService->createCourse($data);
-
-        return new JsonResponse($returnedMsg);
+        return new JsonResponse($this->courseServices->createCourse($data));
     }
 }

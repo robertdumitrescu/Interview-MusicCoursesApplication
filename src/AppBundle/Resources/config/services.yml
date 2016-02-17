@@ -1,3 +1,9 @@
+parameters:
+  app.parameter.course.class: AppBundle\Services\CourseService
+
 services:
-  course:
-    class: AppBundle\Services\CourseService
+  app.course:
+    class: '%app.parameter.course.class%'
+    arguments: ['%storage.data.path%', '%storage.data.courses%']
+    calls:
+      - [setTranslator, ['@translator']]

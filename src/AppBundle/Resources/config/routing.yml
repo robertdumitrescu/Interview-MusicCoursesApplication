@@ -1,0 +1,6 @@
+_app_bundle_api:
+    resource: "@AppBundle/Resources/config/routing/api.yml"
+    prefix:   /data/courses
+
+_app_bundle_render:
+    resource: "@AppBundle/Resources/config/routing/render.yml"

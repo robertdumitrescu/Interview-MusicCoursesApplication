@@ -13,3 +13,5 @@
 .idea
 .idea/*
 .idea/
+web/bundles
+web/bundles/*

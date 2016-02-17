@@ -1,0 +1,295 @@
+<html ng-app="myApp">
+<head>
+    <title>
+        Homepage
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    {% stylesheets '@AppBundle/Resources/public/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+</head>
+<body>
+<div ng-controller="InitController as initCtrl">
+    <div ng-init="getCourses()"></div>
+</div>
+<nav class="navbar navbar-default custom-navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                {% image '@AppBundle/Resources/public/images/logo_03.png' %}
+                <img src="{{ asset_url }}" />
+                {% endimage %}
+            </a>
+        </div>
+        <div class="pull-left menu hidden-xs">
+            <h2 class="custom-nav-title">Cours de Musique</h2>
+
+            <p class="custom-nav-p">Lorem ipsum ipsum lorem ipsum</p>
+        </div>
+        <div class="pull-right menu hidden-xs custom-right-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button class="btn custom-navbar-btn">
+                        Accueil
+                    </button>
+                </li>
+                <li>
+                    <button class="btn custom-navbar-btn">
+                        Notre offre
+                    </button>
+                </li>
+                <li>
+                    <button class="btn custom-navbar-btn">
+                        Les cours
+                    </button>
+                </li>
+                <li>
+                    <button class="btn custom-navbar-btn">
+                        Les instruments
+                    </button>
+                </li>
+                <li>
+                    <button class="btn custom-navbar-btn">
+                        FAQ
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-success navbar-connect-btn">
+                        <i class="fa fa-user"></i>
+                        ME CONNECTER
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+    <div class="custom-jumbotron">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-5 col-lg-3 col-lg-offset-7 custom-jumbotron-container">
+                    <h2 class="custom-jumbotron-title">Les cours de piano</h2>
+
+                    <p class="custom-jumbotron-content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nibh nisl, pretium nec ante vel,
+                        mattis pulvinar lectus. Proin pharetra ac risus vitae volutpat. Quisque non magna et lorem
+                        tincidunt consectetur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean non
+                        blandit arcu.
+                    </p>
+
+                    <button class="btn btn-lg btn-danger">
+                        Decouvrez
+                    </button>
+                </div>
+            </div>
+    </div>
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            {% image '@AppBundle/Resources/public/images/hero_01.png' %}
+            <img src="{{ asset_url }}" class="custom-carousel-img" />
+            {% endimage %}
+            <div class="carousel-caption">
+                ...
+            </div>
+        </div>
+        <div class="item">
+            {% image '@AppBundle/Resources/public/images/hero_01.png' %}
+            <img src="{{ asset_url }}" class="custom-carousel-img" />
+            {% endimage %}
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+
+            {% image '@AppBundle/Resources/public/images/hero_01.png' %}
+            <img src="{{ asset_url }}" class="custom-carousel-img" />
+            {% endimage %}
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="container">
+    <h1 class="call-to-action-title custom-main-title">Cours de musique en ligne</h1>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="row custom-blue-area">
+                <div class="col-xs-12 col-md-3">
+                    <i class="custom-fa fa fa-download"></i>
+                </div>
+                <div class="col-xs-12 col-md-8 custom-blue-text">
+                    Débutants à experts <br>
+                    Cours téléchargeables
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="row custom-blue-area">
+                <div class="col-xs-12 col-md-3">
+                    <i class="custom-fa fa fa-music"></i>
+                </div>
+                <div class="col-xs-12 col-md-8 custom-blue-text">
+                    5 instruments de musique <br>
+                    18 catégories
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="row custom-blue-area">
+                <div class="col-xs-12 col-md-3">
+                    <i class="custom-fa fa fa-desktop"></i>
+                </div>
+                <div class="col-xs-12 col-md-8 custom-blue-text">
+                    Accés illimité 24h/24 <br>
+                    Sur ordinateur & tablette
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" ng-controller="CourseController as courseCtrl">
+    <div class="row custom-fluid-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center custom-blue-title">Nos cours pour débutants</h2>
+
+                    <div class="row text-center">
+                        <div class="col-md-2" ng-repeat="beginnerCourse in beginnerCourses"
+                             ng-click="getCourse(beginnerCourse.level, beginnerCourse.id)">
+                            <img src="{[{beginnerCourse.imgSrc}]}" class="img-circle custom-img">
+
+                            <p class="custom-paragraph">{[{beginnerCourse.name}]}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center custom-blue-title">Nos cours intermédiaires</h2>
+
+
+                    <div class="row text-center">
+                        <div class="col-md-2" ng-repeat="intermediateCourse in intermediateCourses"
+                             ng-click="getCourse(intermediateCourse.level, intermediateCourse.id)">
+                            <img src="{[{intermediateCourse.imgSrc}]}" class="img-circle custom-img">
+
+                            <p class="custom-paragraph">{[{intermediateCourse.name}]}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row custom-fluid-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center custom-blue-title">Nos cours avancés</h2>
+
+                    <div class="row text-center">
+
+                        <div class="col-md-2" ng-repeat="advancedCourse in advancedCourses"
+                             ng-click="getCourse(advancedCourse.level, advancedCourse.id)">
+                            <img src="{[{advancedCourse.imgSrc}]}" class="img-circle custom-img">
+
+                            <p class="custom-paragraph">{[{advancedCourse.name}]}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row custom-promo-bar">
+        <div class="container">
+            <div class="row footer-wrapper">
+                <div class="col-md-12">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <i class="fa fa-lock custom-lock"></i>
+
+                            <p class="footer-placeholder">Paiement sécurisé</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-piano-bottom pull-left">
+                                {% image '@AppBundle/Resources/public/images/logo_03.png' %}
+                                <img src="{{ asset_url }}" />
+                                {% endimage %}
+
+                            </div>
+                            <div class="pull-left central-data">
+                                <h4 class="footer-name">Cours de Musique</h4>
+                                <a href="#" class="footer-link">Cours de Guitare</a>
+                                <span class="footer-separator">-</span>
+                                <a href="#" class="footer-link">Cours Piano</a>
+                                <span class="footer-separator">-</span>
+                                <a href="#" class="footer-link">Cours Basse</a>
+                                <span class="footer-separator">-</span>
+                                <a href="#" class="footer-link">Cours Batterie</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-danger btn-lg footer-main-btn">
+                                Inscrivez vous
+                            </button>
+                            <p class="footer-placeholder">Access ilimite a tous les cours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="{{ asset("bundles/app/js/appInit.js") }}"></script>
+<script src="{{ asset("bundles/app/js/appConfig.js") }}"></script>
+<script src="{{ asset("bundles/app/js/controllers/initController.js") }}"></script>
+<script src="{{ asset("bundles/app/js/controllers/courseController.js") }}"></script>
+</body>
+</html>

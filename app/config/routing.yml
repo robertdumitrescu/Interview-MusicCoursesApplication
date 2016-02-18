@@ -1,3 +1,7 @@
+_music_security:
+    resource: "@MusicSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _app_bundle:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /

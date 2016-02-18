@@ -6,7 +6,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    {% stylesheets '@AppBundle/Resources/public/css/main.css' %}
+    {% stylesheets '@AppBundle/Resources/public/css/main.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets '@AppBundle/Resources/public/css/assets/ngDialog.min.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets '@AppBundle/Resources/public/css/assets/ngDialog-theme.min.css' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
@@ -63,8 +71,8 @@
                         FAQ
                     </button>
                 </li>
-                <li>
-                    <button class="btn btn-success navbar-connect-btn">
+                <li ng-controller="loginHandlerController as loginHandCtrl">
+                    <button class="btn btn-success navbar-connect-btn" ng-click="open()">
                         <i class="fa fa-user"></i>
                         ME CONNECTER
                     </button>
@@ -213,6 +221,7 @@
 
                             <p class="custom-paragraph">{[{intermediateCourse.name}]}</p>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -282,14 +291,19 @@
         </div>
     </div>
 </div>
+
+
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script data-require="angular.js@1.4.3" data-semver="1.4.3" src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="{{ asset("bundles/app/js/assets/ngDialog.min.js") }}"></script>
 <script src="{{ asset("bundles/app/js/appInit.js") }}"></script>
 <script src="{{ asset("bundles/app/js/appConfig.js") }}"></script>
 <script src="{{ asset("bundles/app/js/controllers/initController.js") }}"></script>
 <script src="{{ asset("bundles/app/js/controllers/courseController.js") }}"></script>
+<script src="{{ asset("bundles/app/js/controllers/loginHandlerController.js") }}"></script>
+<script src="{{ asset("bundles/app/js/controllers/loginFormController.js") }}"></script>
 </body>
 </html>

@@ -2,10 +2,13 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
+    encoders:
+        Music\SecurityBundle\Entity\User: bcrypt
+
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        custom_user_provider:
+            id: music.security.provider.user
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +18,9 @@ security:
 
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                    - music.security.authenticator.token
             # activate different ways to authenticate
 
             # http_basic: ~

@@ -2,3 +2,8 @@ homepage:
   pattern:  /
   defaults: { _controller: AppBundle:Render:homepage }
   methods:  GET
+
+loginForm:
+  pattern:  /loginForm
+  defaults: { _controller: AppBundle:Render:loginForm }
+  methods:  GET

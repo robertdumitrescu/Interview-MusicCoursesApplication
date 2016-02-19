@@ -52,6 +52,14 @@ When the application is installed and the assetic copied all the static resource
 
 > php app/console app:init
 
+After the command finished the schema defining process you can run the app using the command:
+
+> php app/console server:run
+
+Now the server will listen for incoming connection on port 8000. You can just go to the browser and type in the adress bar:
+
+> http://localhost:8000/
+
 ##Contact
 
 - My resume: [Robert Dumitrescu resume](http://rdumitrescu.com/resume)

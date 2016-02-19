@@ -25,8 +25,8 @@ Back:
 
 Front:
  Create one angular application :
-	- integrate the psd in responsive
-	- show lessons thanks to the API. Must match the PSD provided.
+   - integrate the psd in responsive
+   - show lessons thanks to the API. Must match the PSD provided.
 
 ## Result
 

@@ -1,4 +1,7 @@
-interview-ironweb2
-==================
+# Interview-MusicCoursesApplication
 
-A Symfony project created on February 16, 2016, 6:42 am.
+## Overview
+This is a task received from an British development company that builds Symfony application for e-commerce platforms.
+I applied for the following position:
+
+> Full-stack web developer

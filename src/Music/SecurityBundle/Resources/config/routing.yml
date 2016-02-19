@@ -1,0 +1,8 @@
+login_check:
+  pattern:  /login_check
+  defaults: { _controller: MusicSecurityBundle:Security:check }
+  methods:  POST
+
+logout:
+  pattern:  /logout
+  defaults: { _controller: MusicSecurityBundle:Security:logout }

@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    {% stylesheets '@AppBundle/Resources/public/css/main.css' %}
+
+    {% stylesheets
+    '@AppBundle/Resources/public/css/main.css'
+    '@AppBundle/Resources/public/css/assets/ngDialog.min.css'
+    '@AppBundle/Resources/public/css/assets/ngDialog-theme.min.css'
+    filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
@@ -63,8 +68,8 @@
                         FAQ
                     </button>
                 </li>
-                <li>
-                    <button class="btn btn-success navbar-connect-btn">
+                <li ng-controller="loginHandlerController as loginHandCtrl">
+                    <button class="btn btn-success navbar-connect-btn" ng-click="open()">
                         <i class="fa fa-user"></i>
                         ME CONNECTER
                     </button>
@@ -78,7 +83,7 @@
 <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
     <div class="custom-jumbotron">
             <div class="row">
-                <div class="col-md-5 col-md-offset-5 col-lg-3 col-lg-offset-7 custom-jumbotron-container">
+                <div class="col-md-5 col-md-offset-5 col-lg-3 col-lg-offset-6 custom-jumbotron-container">
                     <h2 class="custom-jumbotron-title">Les cours de piano</h2>
 
                     <p class="custom-jumbotron-content">
@@ -88,7 +93,7 @@
                         blandit arcu.
                     </p>
 
-                    <button class="btn btn-lg btn-danger">
+                    <button class="btn btn-lg btn-danger decouvrez-btn">
                         Decouvrez
                     </button>
                 </div>
@@ -188,7 +193,7 @@
                     <h2 class="text-center custom-blue-title">Nos cours pour débutants</h2>
 
                     <div class="row text-center">
-                        <div class="col-md-2" ng-repeat="beginnerCourse in beginnerCourses"
+                        <div class="col-md-2" ng-repeat="beginnerCourse in beginnerCourses track by beginnerCourse.id"
                              ng-click="getCourse(beginnerCourse.level, beginnerCourse.id)">
                             <img src="{[{beginnerCourse.imgSrc}]}" class="img-circle custom-img">
 
@@ -207,12 +212,13 @@
 
 
                     <div class="row text-center">
-                        <div class="col-md-2" ng-repeat="intermediateCourse in intermediateCourses"
+                        <div class="col-md-2" ng-repeat="intermediateCourse in intermediateCourses track by intermediateCourse.id"
                              ng-click="getCourse(intermediateCourse.level, intermediateCourse.id)">
                             <img src="{[{intermediateCourse.imgSrc}]}" class="img-circle custom-img">
 
                             <p class="custom-paragraph">{[{intermediateCourse.name}]}</p>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -226,7 +232,7 @@
 
                     <div class="row text-center">
 
-                        <div class="col-md-2" ng-repeat="advancedCourse in advancedCourses"
+                        <div class="col-md-2" ng-repeat="advancedCourse in advancedCourses track by advancedCourse.id"
                              ng-click="getCourse(advancedCourse.level, advancedCourse.id)">
                             <img src="{[{advancedCourse.imgSrc}]}" class="img-circle custom-img">
 
@@ -282,14 +288,24 @@
         </div>
     </div>
 </div>
+
+
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-<script src="{{ asset("bundles/app/js/appInit.js") }}"></script>
-<script src="{{ asset("bundles/app/js/appConfig.js") }}"></script>
-<script src="{{ asset("bundles/app/js/controllers/initController.js") }}"></script>
-<script src="{{ asset("bundles/app/js/controllers/courseController.js") }}"></script>
+<script data-require="angular.js@1.4.3" data-semver="1.4.3" src="https://code.angularjs.org/1.4.3/angular.js"></script>
+
+{% javascripts
+'@AppBundle/Resources/public/js/assets/ngDialog.min.js'
+'@AppBundle/Resources/public/js/appInit.js'
+'@AppBundle/Resources/public/js/appConfig.js'
+'@AppBundle/Resources/public/js/controllers/initController.js'
+'@AppBundle/Resources/public/js/controllers/courseController.js'
+'@AppBundle/Resources/public/js/controllers/loginHandlerController.js'
+'@AppBundle/Resources/public/js/controllers/loginFormController.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 </body>
 </html>

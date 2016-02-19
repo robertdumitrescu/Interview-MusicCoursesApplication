@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Exception\EmptyContentException;
-use AppBundle\Helper\Criteria;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,6 +14,7 @@ class ApiController extends BaseController
     public function coursesListingAction()
     {
         $this->initialize();
+
         return new JsonResponse($this->courseServices->findBy([]));
     }
 
@@ -29,7 +29,7 @@ class ApiController extends BaseController
 
         try {
             $response = $this->courseServices->findBy([
-                Criteria::LEVEL => $level,
+                'level' => $level,
             ]);
         } catch (EmptyContentException $ece) {
             /**
@@ -55,8 +55,8 @@ class ApiController extends BaseController
 
         try {
             $response = $this->courseServices->findBy([
-                Criteria::ID => $id,
-                Criteria::LEVEL => $level,
+                'course' => $id,
+                'level' => $level,
             ]);
         } catch (EmptyContentException $ece) {
             /**

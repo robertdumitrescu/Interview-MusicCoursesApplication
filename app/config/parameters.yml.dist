@@ -2,8 +2,14 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: music
+    database_user: symfony
+    database_password: ~
     # A secret key that's used to generate certain security-related tokens
     secret:             ThisTokenIsNotSoSecretChangeIt
-    storage.data.path:      '%kernek.root_dir%/../src/AppBundle/Resources/data/'
+    storage.data.path:      '%kernel.root_dir%/../src/AppBundle/Resources/data/'
     storage.data.courses:   'courses.json'
     storage.data.users:     'users.json'
+    music.app.user.class: 'Music\SecurityBundle\Entity\User'

@@ -4,6 +4,4 @@ parameters:
 services:
   app.course:
     class: '%app.parameter.course.class%'
-    arguments: ['%storage.data.path%', '%storage.data.courses%']
-    calls:
-      - [setTranslator, ['@translator']]
+    arguments: ['@translator', "@=service('doctrine').getManager().getRepository('AppBundle:Lesson')"]

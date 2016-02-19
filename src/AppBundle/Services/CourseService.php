@@ -2,22 +2,26 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\Lesson;
 use AppBundle\Exception\EmptyContentException;
 use AppBundle\Helper\Criteria;
+use AppBundle\Repository\LessonRepository;
 use Symfony\Component\Translation\Translator;
 
 class CourseService
 {
-    /** @var  string */
-    protected $storagePath;
-
     /** @var  Translator */
     protected $translator;
 
-    public function __construct($storagePath, $coursesFile)
+    /** @var  LessonRepository */
+    protected $lessonRepository;
+
+    public function __construct($translator, $repository)
     {
         $this
-            ->setStoragePath($storagePath, $coursesFile);
+            ->setTranslator($translator)
+            ->setLessonRepository($repository)
+        ;
     }
 
     /**
@@ -33,14 +37,13 @@ class CourseService
     }
 
     /**
-     * @param   string $storagePath
-     * @param   string $coursesFile
+     * @param   LessonRepository    $repository
      *
      * @return  $this
      */
-    protected function setStoragePath($storagePath, $coursesFile)
+    public function setLessonRepository($repository)
     {
-        $this->storagePath = sprintf('%s/%s', rtrim($storagePath, '/'), ltrim($coursesFile, '/'));
+        $this->lessonRepository = $repository;
 
         return $this;
     }
@@ -53,108 +56,47 @@ class CourseService
      */
     public function findBy(array $criteria)
     {
-        $keys = array_keys($criteria);
-        if (
-            count($keys) == 2 && (
-            ($keys[0] == Criteria::LEVEL && $keys[1] == Criteria::ID) ||
-            ($keys[1] == Criteria::LEVEL && $keys[0] == Criteria::ID))
-        ) {
-            return $this->getCourseByIdAndLevel($criteria[Criteria::ID], $criteria[Criteria::LEVEL]);
-        } elseif (count($keys) == 1) {
-            return $this->getCourseByLevel($criteria[Criteria::LEVEL]);
+        $lessons = $this->lessonRepository->findBy($criteria);
+
+        if (!empty($lessons)) {
+            return $this->translateLessons($lessons);
         }
 
-        return $this->findAll();
+        if (empty($criteria)) {
+            throw new EmptyContentException($this->translator->trans('There are no courses!'));
+        }
+        $criteriaKeys = array_keys($criteria);
 
+        $criteriaString = array_map(function($key) {
+            return sprintf('%s : %%%s%%', $key, $key);
+        }, $criteriaKeys);
+
+        $criteriaMapValues = array_map(function($key, $item) {
+            return [sprintf('%%%s%%', $key) => $item];
+        }, $criteriaKeys, array_values($criteria));
+        $criteriaValues = [];
+        foreach ($criteriaMapValues as $value) {
+            $criteriaValues[key($value)] = current($value);
+        }
+
+        throw new EmptyContentException($this->translator->trans(sprintf('There are no results to match your criteria(%s)', implode(', ', $criteriaString)), $criteriaValues));
     }
 
-    /**
-     * @return  array
-     */
-    protected function findAll()
+    public function translateLessons(array $lessons)
     {
-        return json_decode(file_get_contents($this->storagePath), true);
-    }
-
-    /**
-     * Filter input courses data by level
-     *
-     * @param   int     $level
-     *
-     * @return  array
-     * @throws  EmptyContentException
-     */
-    protected function getCourseByLevel ($level)
-    {
-        /**
-         *  The courses.json file can change and so we fetch it on every method call
-         */
-        /** @var array $data */
-        $data = $this->findAll();
-        if (!count($data)) {
-            throw new EmptyContentException($this->translator->trans('There are no results to match your criteria(level: %level%', array(
-                '%level%'   => $level,
-            )));
+        $built = [];
+        /** @var Lesson $lesson */
+        foreach ($lessons as $lesson) {
+            $built[] = [
+                'id'    => $lesson->getId(),
+                'name' => $lesson->getName(),
+                'level' => $lesson->getLevel(),
+                'author' => $lesson->getCourse()->getAuthor(),
+                'imgSrc' => $lesson->getImagePath(),
+            ];
         }
 
-        $filteredCourses = [];
-        $hasAtLeastACourse = false;
-        foreach ($data['courses'] as $key => $course) {
-            if ($level == $course[Criteria::LEVEL]) {
-                array_push($filteredCourses, $course);
-                $hasAtLeastACourse = true;
-            }
-        }
-
-        if (!$hasAtLeastACourse) {
-            throw new EmptyContentException($this->translator->trans('There are no results to match your criteria(level: %level%', array(
-                '%level%'   => $level,
-            )));
-        }
-
-        return $filteredCourses;
-    }
-
-    /**
-     * Return a course by level and id
-     *
-     * @param   int     $level
-     * @param   int     $id
-     *
-     * @return  array
-     * @throws  EmptyContentException
-     */
-    protected function getCourseByIdAndLevel ($id, $level)
-    {
-        /**
-         *  The courses.json file can change and so we fetch it on every method call
-         */
-        /** @var array $data */
-        $data = $this->findAll();
-        if (!count($data)) {
-            throw new EmptyContentException($this->translator->trans('There are no results to match your criteria( id: %id%, level: %level%', array(
-                '%id%'      => $id,
-                '%level%'   => $level,
-            )));
-        }
-
-        $filteredCourses = [];
-        $hasAtLeastACourse = false;
-        foreach ($data['courses'] as $key => $course ) {
-            if ($level == $course[Criteria::LEVEL] && $id == $course[Criteria::ID]) {
-                array_push($filteredCourses, $course);
-                $hasAtLeastACourse = true;
-            }
-        }
-
-        if (!$hasAtLeastACourse) {
-            throw new EmptyContentException($this->translator->trans('There are no results to match your criteria( id: %id%, level: %level%', array(
-                '%id%'      => $id,
-                '%level%'   => $level,
-            )));
-        }
-
-        return $filteredCourses[0];
+        return $built;
     }
 
     /**
